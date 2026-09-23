@@ -1,135 +1,284 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-Hant">
 <head>
-<title>Jazz Night 2026</title>
-<style>
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f0e6;
-  padding: 40px;
-  color: #222;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>皇帝企鵝 Emperor Penguin</title>
+  <style>
+    /* ===== 全域設定 ===== */
+    body {
+      margin: 0;
+      padding: 4px;
+      background-color: #0b1622;
+      color: #eef3f7;
+      font-family: Georgia, "Noto Serif TC", "PMingLiU", serif;
+      font-size: 15px;
+      line-height: 1.7;
+    }
 
-h1 {
-  color: #8b0000;
-  font-size: 32px;
-  margin-bottom: 5px;
-}
+    h1, h2 {
+      margin: 0;
+    }
 
-.subtitle {
-  font-style: italic;
-  margin-bottom: 15px;
-}
+    /* ===== 連結樣式（未拜訪、已拜訪、滑過、點擊中）===== */
+    a:link {
+      color: #f2b441;
+    }
+    a:visited {
+      color: #9fc9e8;
+    }
+    a:hover {
+      color: #0b1622;
+      background-color: #f2b441;
+    }
+    a:active {
+      color: #ffffff;
+      background-color: #e0703a;
+    }
 
-.date {
-  color: #8b0000;
-  font-weight: bold;
-  margin-bottom: 0;
-}
+    /* ===== Header ===== */
+    .header {
+      background-color: #13304d;
+      border: 2px solid #2f5b82;
+      text-align: center;
+      padding: 28px 20px 20px;
+    }
+    .header h1 {
+      font-size: 32px;
+      letter-spacing: 4px;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+    .subtitle {
+      font-size: 14px;
+      color: #f2b441;
+      margin: 0 0 14px;
+    }
+    .event-info {
+      font-size: 13px;
+      color: #b8cde0;
+      margin: 0;
+    }
 
-.time {
-  margin-top: 0;
-}
+    /* ===== 主圖 ===== */
+    .banner {
+      text-align: center;
+      padding: 14px 10px 18px;
+    }
+    .banner img {
+      width: 560px;
+      max-width: 100%;
+      display: block;
+      margin: 0 auto;
+      border: 3px solid #2f5b82;
+    }
+    .banner a:hover {
+      background-color: transparent;
+    }
+    .banner a:hover img {
+      border-color: #f2b441;
+    }
+    .caption {
+      font-size: 13px;
+      font-style: italic;
+      color: #b8cde0;
+      margin: 10px 0 0;
+    }
 
-img {
-  width: 300px;
-  border: none;
-}
+    /* ===== 2 x 2 版面 ===== */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .box {
+      padding: 20px 18px 24px;
+      font-size: 14px;
+    }
+    .box h2 {
+      font-size: 21px;
+      margin-bottom: 12px;
+      padding-left: 10px;
+      border-left: 5px solid #f2b441;
+    }
+    .box p {
+      margin: 0 0 10px;
+    }
+    .box ul {
+      margin: 0 0 10px;
+      padding-left: 20px;
+    }
+    .label {
+      display: block;
+      font-weight: bold;
+    }
 
-h2 {
-  background-color: #e6dcc0;
-  color: #8b0000;
-  padding: 8px 12px;
-  font-size: 22px;
-}
+    /* 左上：基本介紹（冰白） */
+    .intro {
+      background-color: #e8f1f7;
+      color: #1b2a38;
+    }
+    .intro h2 {
+      color: #13304d;
+    }
 
-.old-price {
-  text-decoration: line-through;
-  color: #888;
-}
+    /* 右上：分布地區（深海藍） */
+    .range {
+      background-color: #1d3b57;
+      color: #eef3f7;
+    }
+    .range h2 {
+      color: #ffffff;
+    }
+    .range .label {
+      color: #f2b441;
+    }
 
-.new-price {
-  color: #8b0000;
-  font-weight: bold;
-}
+    /* 左下：生活習性（冰藍） */
+    .habits {
+      background-color: #cfe0ec;
+      color: #1b2a38;
+    }
+    .habits h2 {
+      color: #13304d;
+    }
+    .habits .label {
+      color: #1d4f7a;
+    }
 
-.old-time {
-  text-decoration: line-through;
-  color: red;
-}
+    /* 右下：繁衍（極夜藍） */
+    .breeding {
+      background-color: #13283d;
+      color: #eef3f7;
+    }
+    .breeding h2 {
+      color: #ffffff;
+    }
+    .breeding .label {
+      color: #f2b441;
+    }
 
-.new-time {
-  color: green;
-  text-decoration: underline;
-}
+    .highlight {
+      color: #e0703a;
+    }
 
-.contact-box {
-  background-color: #fdf3c4;
-  padding: 15px 20px;
-  font-style: italic;
-}
+    /* 更新／刪除／過時的資訊 */
+    del {
+      color: #7a8894;
+    }
+    ins {
+      text-decoration: none;
+      background-color: #fde9b8;
+      color: #7a3d0c;
+      font-weight: bold;
+      padding: 0 3px;
+    }
+    s {
+      color: #9aaab8;
+    }
 
-/* unvisited link */
-a:link {
-  color: blue;
-  text-decoration: underline;
-}
+    /* ===== 聯絡資訊 ===== */
+    .contact {
+      background-color: #13304d;
+      border: 2px solid #2f5b82;
+      text-align: center;
+      padding: 18px 20px;
+      font-size: 14px;
+    }
+    .contact h2 {
+      color: #f2b441;
+      font-size: 21px;
+      margin-bottom: 12px;
+    }
+    .contact address {
+      font-style: normal;
+    }
+    .contact p {
+      margin: 0 0 8px;
+    }
 
-/* visited link */
-a:visited {
-  color: grey;
-  text-decoration: underline;
-}
-
-/* mouse over link */
-a:hover {
-  color: red;
-}
-
-/* selected link */
-a:active {
-  color: pink;
-  background-color: yellow;
-  text-decoration: underline;
-}
-</style>
+    /* 手機版：改成單欄 */
+    @media (max-width: 600px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<h1>JAZZ NIGHT 2026</h1>
-<p class="subtitle">Live Music &amp; Dance</p>
+  <!-- 1. Header -->
+  <header class="header">
+    <h1>皇帝企鵝 EMPEROR PENGUIN</h1>
+    <p class="subtitle"><em>南極冰原上的帝王</em></p>
+    <p class="event-info">
+      資料整理：<time datetime="2026-09-23">2026 年 9 月 23 日</time> · 南極洲 Antarctica
+    </p>
+  </header>
 
-<p class="date">Saturday, October 10, 2026</p>
-<p class="time">7:30 PM – 10:30 PM</p>
+  <!-- 2. 大圖（可點擊） -->
+  <div class="banner">
+    <a href="https://en.wikipedia.org/wiki/Emperor_penguin" target="_blank">
+      <img src="emperor-penguin.svg" alt="皇帝企鵝成鳥與幼鳥站在南極冰原上的插圖">
+    </a>
+    <p class="caption">點擊圖片，閱讀維基百科上的皇帝企鵝條目。</p>
+  </div>
 
-<a href="https://www.youtube.com/?ref=poster" target="_blank">
-  <img src="images.jpg" alt="Jazz Night Poster">
-</a>
+  <!-- 3. 2 x 2 版面 -->
+  <main class="grid">
 
-<h2>About the Event</h2>
+    <section class="box intro">
+      <h2>基本介紹</h2>
+      <p><strong>皇帝企鵝</strong>（學名 <em>Aptenodytes forsteri</em>）是現存體型<strong class="highlight">最大</strong>的企鵝。</p>
+      <ul>
+        <li>身高：約 100–130 公分</li>
+        <li>體重：約 22–45 公斤</li>
+        <li>壽命：野外約 20 年</li>
+      </ul>
+      <p>牠們的招牌特徵是耳後鮮豔的<em>金黃色斑塊</em>，以及胸前淡黃色的羽毛。</p>
+    </section>
 
-<p>Join us for an evening of <b>live jazz, dancing, and good music</b>.</p>
+    <section class="box range">
+      <h2>分布地區</h2>
+      <p><span class="label">棲息地</span>只生活在南極洲，在沿岸的海冰上繁殖。</p>
+      <p><span class="label">族群數量</span>
+        早期估計：<s>約 23.8 萬對（2009）</s><br>
+        衛星調查：約 25.6 萬對繁殖對（2020）
+      </p>
+      <p><span class="label">保育狀態</span>
+        <del>無危（LC）</del> → <ins>近危（NT）</ins><br>
+        氣候暖化造成海冰減少，是牠們最大的威脅。
+      </p>
+    </section>
 
-<p>Ticket: <span class="old-price">$30</span><br>
-<span class="new-price">Special Price: $20</span></p>
+    <section class="box habits">
+      <h2>生活習性</h2>
+      <p><span class="label">飲食</span>以魚類、南極磷蝦和魷魚為主食。</p>
+      <p><span class="label">潛水高手</span>可潛到 <strong>500 公尺</strong>以上，一次閉氣可達 20 多分鐘。</p>
+      <p><span class="label">抱團取暖</span>面對零下 40°C 的強風，成群企鵝會緊緊擠在一起，並輪流移到外圈，讓每隻都有機會待在溫暖的中心。</p>
+    </section>
 
-<p>We originally planned to start at <span class="old-time">8:00 PM</span> <span class="new-time">7:30 PM</span>.</p>
+    <section class="box breeding">
+      <h2>繁衍</h2>
+      <p><span class="label">南極冬季產卵</span>雌企鵝在 5–6 月產下<strong>一顆蛋</strong>，交給雄企鵝後就回到海中覓食。</p>
+      <p><span class="label">爸爸孵蛋</span>雄企鵝把蛋放在腳上，用腹部的育雛袋蓋住，孵化約 <strong>65 天</strong>，這段期間完全不吃東西。</p>
+      <p><span class="label">小企鵝成長</span>幼鳥 7–8 月孵化，約 12 月至隔年 1 月換上防水羽毛，開始獨立下海。</p>
+      <p><a href="https://www.youtube.com/results?search_query=emperor+penguin" target="_blank">觀看皇帝企鵝影片</a></p>
+    </section>
 
-<h2>More Information</h2>
+  </main>
 
-<p>
-<a href="https://www.youtube.com/?ref=website" target="_blank">Visit our website</a><br>
-<a href="https://www.youtube.com/?ref=email" target="_blank">Email us</a><br>
-<a href="https://www.youtube.com/?ref=call" target="_blank">Call us</a>
-</p>
-
-<h2>Contact</h2>
-
-<div class="contact-box">
-Jazz Night Taipei<br>
-123 Music Street, Taipei<br>
-<a href="https://www.youtube.com/?ref=contact" target="_blank">jazznight@example.com</a>
-</div>
+  <!-- 4. 聯絡資訊 -->
+  <footer class="contact">
+    <h2>聯絡我們</h2>
+    <address>
+      <p>南極生態研究小站<br>臺北市大安區忠孝東路三段1號</p>
+      <p>
+        <a href="mailto:hello@penguin.example">hello@penguin.example</a>
+        &nbsp;|&nbsp;
+        <a href="tel:+886223456789">+886-2-2345-6789</a>
+      </p>
+    </address>
+  </footer>
 
 </body>
 </html>
